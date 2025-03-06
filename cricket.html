@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricket Game</title>
+  <link rel="stylesheet" href="cricket.css">
+</head>
+<body>
+  <h1>Bat Ball Stump Game</h1>
+
+  <div class="game-container">
+    <div class="choice" onclick="playGame('Bat')">
+      <img src="cricket-bat.jpg" alt="Bat">
+      <button>Bat</button>
+    </div>
+    <div class="choice" onclick="playGame('Ball')">
+      <img src="cricket-ball.webp" alt="Ball">
+      <button>Ball</button>
+    </div>
+    <div class="choice" onclick="playGame('Stump')">
+      <img src="cricket-wicket.jpg" alt="Stump">
+      <button>Stump</button>
+    </div>
+  </div>
+
+  <script>
+    function playGame(playerChoice) {
+      let randomNumber = Math.random() * 3;
+      let computerChoice;
+      
+      if (randomNumber <= 1) {
+        computerChoice = 'Bat';
+      } else if (randomNumber <= 2) {
+        computerChoice = 'Ball';
+      } else {
+        computerChoice = 'Stump';
+      }
+      
+      let resultMsg;
+      if (playerChoice === 'Bat' && computerChoice === 'Ball' ||
+          playerChoice === 'Ball' && computerChoice === 'Stump' ||
+          playerChoice === 'Stump' && computerChoice === 'Bat') {
+        resultMsg = 'You won!';
+      } else if (playerChoice === computerChoice) {
+        resultMsg = "It's a tie.";
+      } else {
+        resultMsg = 'Computer won!';
+      }
+      
+      alert(`You have chosen ${playerChoice}.
+Computer choice is ${computerChoice}.
+${resultMsg}`);
+    }
+  </script>
+</body>
+</html>
