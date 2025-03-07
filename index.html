@@ -23,12 +23,13 @@
       <button>Stump</button>
     </div>
   </div>
-
   <script>
+    let wins = 0, losses = 0, ties = 0;
+  
     function playGame(playerChoice) {
       let randomNumber = Math.random() * 3;
+  
       let computerChoice;
-      
       if (randomNumber <= 1) {
         computerChoice = 'Bat';
       } else if (randomNumber <= 2) {
@@ -36,22 +37,28 @@
       } else {
         computerChoice = 'Stump';
       }
-      
+  
       let resultMsg;
       if (playerChoice === 'Bat' && computerChoice === 'Ball' ||
           playerChoice === 'Ball' && computerChoice === 'Stump' ||
           playerChoice === 'Stump' && computerChoice === 'Bat') {
         resultMsg = 'You won!';
+        wins++;
       } else if (playerChoice === computerChoice) {
         resultMsg = "It's a tie.";
+        ties++;
       } else {
         resultMsg = 'Computer won!';
+        losses++;
       }
-      
+  
       alert(`You have chosen ${playerChoice}.
-Computer choice is ${computerChoice}.
-${resultMsg}`);
+  Computer choice is ${computerChoice}.
+  ${resultMsg}
+  
+  Win: ${wins}   Lost: ${losses}   Tie: ${ties}`);
     }
   </script>
+  
 </body>
 </html>
