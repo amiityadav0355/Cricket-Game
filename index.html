@@ -23,8 +23,15 @@
       <button>Stump</button>
     </div>
   </div>
+
+  <h2>Game Stats</h2>
+  <p id="stats">Win: 0 | Loss: 0 | Tie: 0</p>
+
+  <button onclick="resetStats()">Reset Stats</button>
+
   <script>
-    let wins = 0, losses = 0, ties = 0;
+    let gameStats = JSON.parse(localStorage.getItem('cricketGameStats')) || { wins: 0, losses: 0, ties: 0 };
+    updateStats();
   
     function playGame(playerChoice) {
       let randomNumber = Math.random() * 3;
@@ -43,22 +50,34 @@
           playerChoice === 'Ball' && computerChoice === 'Stump' ||
           playerChoice === 'Stump' && computerChoice === 'Bat') {
         resultMsg = 'You won!';
-        wins++;
+        gameStats.wins++;
       } else if (playerChoice === computerChoice) {
         resultMsg = "It's a tie.";
-        ties++;
+        gameStats.ties++;
       } else {
         resultMsg = 'Computer won!';
-        losses++;
+        gameStats.losses++;
       }
+  
+      localStorage.setItem('cricketGameStats', JSON.stringify(gameStats));
+      updateStats();
   
       alert(`You have chosen ${playerChoice}.
   Computer choice is ${computerChoice}.
   ${resultMsg}
   
-  Win: ${wins}   Lost: ${losses}   Tie: ${ties}`);
+  Win: ${gameStats.wins}   Lost: ${gameStats.losses}   Tie: ${gameStats.ties}`);
+    }
+  
+    function updateStats() {
+      document.getElementById('stats').innerText = `Win: ${gameStats.wins} | Loss: ${gameStats.losses} | Tie: ${gameStats.ties}`;
+    }
+  
+    function resetStats() {
+      gameStats = { wins: 0, losses: 0, ties: 0 };
+      localStorage.setItem('cricketGameStats', JSON.stringify(gameStats));
+      updateStats();
     }
   </script>
-  
 </body>
 </html>
