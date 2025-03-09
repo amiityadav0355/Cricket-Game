@@ -26,6 +26,7 @@
 
   <h2>Game Stats</h2>
   <p id="stats">Win: 0 | Loss: 0 | Tie: 0</p>
+  <h3 id="result-message"></h3>
 
   <button onclick="resetStats()">Reset Stats</button>
 
@@ -61,12 +62,10 @@
   
       localStorage.setItem('cricketGameStats', JSON.stringify(gameStats));
       updateStats();
-  
-      alert(`You have chosen ${playerChoice}.
-  Computer choice is ${computerChoice}.
-  ${resultMsg}
-  
-  Win: ${gameStats.wins}   Lost: ${gameStats.losses}   Tie: ${gameStats.ties}`);
+      
+      document.getElementById('result-message').innerText = `You have chosen ${playerChoice}.
+       Computer choice is ${computerChoice}.
+        ${resultMsg}`;
     }
   
     function updateStats() {
@@ -77,6 +76,7 @@
       gameStats = { wins: 0, losses: 0, ties: 0 };
       localStorage.setItem('cricketGameStats', JSON.stringify(gameStats));
       updateStats();
+      document.getElementById('result-message').innerText = "";
     }
   </script>
 </body>
